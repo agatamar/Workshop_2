@@ -1,19 +1,5 @@
-
-
 from models import User
-
-from psycopg2 import connect,OperationalError
-
-def get_connection(base='workszopy'):
-    username='postgres'
-    haslo='coderslab'
-    host='localhost'
-
-    try:
-        cnx=connect(host=host,user=username,password=haslo, database=base)
-        return cnx
-    except OperationalError:
-        return None
+from db_connection import get_connection
 
 
 
@@ -45,7 +31,7 @@ if __name__=='__main__':
         u3.email="wypas@wp.pl"
         u3.save_to_db(cursor)
         cnx.commit()
-        u=User.load_user_by_id(cursor,user_id=8)
+        u=User.load_user_by_id(cursor,user_id=11)
         u.delete(cursor)
         cnx.commit()
         print(u3)
@@ -63,6 +49,6 @@ if __name__=='__main__':
 
 # w konsoli
 # virtualenv : source ~/virtualenv/module_1/bin/activate
-# python szerwer.py --help
-# python szerwer.py --u abc --p ppp
-# python szerwer.py -u abc -p bbb -n ccc -e
+# python user_management.py --help
+# python user_management.py --u abc --p ppp
+# python user_management.py -u abc -p bbb -n ccc -e
